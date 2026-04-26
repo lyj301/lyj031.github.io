@@ -1,0 +1,227 @@
+body {
+  color: #222;
+  font-family: 'Noto Sans', sans-serif;
+}
+
+.navbar {
+  border-bottom: 1px solid #eef0f3;
+  font-family: 'Google Sans', sans-serif;
+}
+
+.navbar-brand .navbar-item {
+  font-weight: 700;
+}
+
+.hero-body {
+  padding-top: 3.5rem;
+  padding-bottom: 2.5rem;
+}
+
+.publication-title {
+  font-family: 'Google Sans', sans-serif;
+  line-height: 1.12;
+  letter-spacing: 0;
+}
+
+.venue {
+  color: #235d77;
+  font-family: 'Google Sans', sans-serif;
+  font-weight: 700;
+  margin-top: -0.5rem;
+}
+
+.publication-authors {
+  font-family: 'Google Sans', sans-serif;
+  line-height: 1.55;
+}
+
+.affiliations {
+  color: #4f5965;
+  margin-top: 0.35rem;
+}
+
+.publication-note {
+  color: #687381;
+  font-size: 0.95rem;
+  margin-top: 0.5rem;
+}
+
+.author-block {
+  display: inline-block;
+  margin: 0 0.1rem;
+}
+
+.publication-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  justify-content: center;
+  margin-top: 1.25rem;
+}
+
+.publication-links .button {
+  min-width: 7.25rem;
+}
+
+.compact-section {
+  padding-top: 2.25rem;
+  padding-bottom: 2.25rem;
+}
+
+.section-title {
+  font-family: 'Google Sans', sans-serif;
+  text-align: center;
+}
+
+.content {
+  font-size: 1.06rem;
+  line-height: 1.7;
+}
+
+.overview-text,
+.abstract-text {
+  max-width: 860px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.overview-text {
+  text-align: center;
+}
+
+.abstract-text {
+  text-align: justify;
+}
+
+.highlight-list {
+  max-width: 860px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.highlight-list li {
+  margin-bottom: 0.45rem;
+}
+
+.paper-figure {
+  margin: 1.25rem auto 0;
+  text-align: center;
+}
+
+.paper-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid #dfe4ea;
+  border-radius: 6px;
+  background: #fff;
+}
+
+.narrow-table {
+  max-width: 760px;
+}
+
+.result-grid {
+  margin-top: 0.75rem;
+}
+
+.result-grid .paper-figure {
+  margin-top: 0;
+}
+
+.results-carousel {
+  margin-top: 1.25rem;
+  overflow: hidden;
+}
+
+.results-carousel .item {
+  box-sizing: border-box;
+  height: 520px;
+  margin: 0.25rem;
+  overflow: hidden;
+  border: 1px solid #dfe4ea;
+  border-radius: 6px;
+  background: #fff;
+}
+
+.result-frame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 450px;
+  padding: 1rem;
+}
+
+.result-frame img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.carousel-caption {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 70px;
+  margin: 0;
+  padding: 0.75rem 1rem;
+  border-top: 1px solid #edf0f3;
+  color: #5f6b78;
+  font-size: 0.95rem;
+  line-height: 1.35;
+  text-align: center;
+}
+
+figcaption {
+  color: #5f6b78;
+  font-size: 0.92rem;
+  line-height: 1.4;
+  margin-top: 0.5rem;
+}
+
+pre {
+  border: 1px solid #dfe4ea;
+  border-radius: 6px;
+  background: #f8fafc;
+  font-size: 0.94rem;
+  white-space: pre-wrap;
+}
+
+.footer {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+@media screen and (max-width: 768px) {
+  .hero-body {
+    padding-top: 2.5rem;
+  }
+
+  .publication-title {
+    font-size: 2rem !important;
+  }
+
+  .content {
+    font-size: 1rem;
+  }
+
+  .publication-links .button {
+    min-width: 6.7rem;
+  }
+
+  .results-carousel .item {
+    height: 420px;
+  }
+
+  .result-frame {
+    height: 340px;
+  }
+
+  .carousel-caption {
+    height: 80px;
+  }
+}

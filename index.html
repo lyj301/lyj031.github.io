@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="RemoteReasoner is a unified geospatial reasoning workflow for region, pixel, and contour reasoning in remote sensing imagery.">
+  <meta name="keywords" content="RemoteReasoner, geospatial reasoning, remote sensing, MLLM, reinforcement learning">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RemoteReasoner</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/remote_reasoner_figures/logo.jpg">
+
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar is-white" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="#top">RemoteReasoner</a>
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-end">
+      <a class="navbar-item" href="#abstract">Abstract</a>
+      <a class="navbar-item" href="#architecture">Architecture</a>
+      <a class="navbar-item" href="#results">Results</a>
+      <a class="navbar-item" href="#BibTeX">BibTeX</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero" id="top">
+  <div class="hero-body">
+    <div class="container is-max-desktop has-text-centered">
+      <h1 class="title is-1 publication-title">RemoteReasoner: Towards Unifying Geospatial Reasoning Workflow</h1>
+      <p class="subtitle is-4 venue">AAAI 2026</p>
+
+      <div class="is-size-5 publication-authors">
+        <span class="author-block">Liang Yao<sup>1,*</sup>,</span>
+        <span class="author-block">Fan Liu<sup>1,*&dagger;</sup>,</span>
+        <span class="author-block">Hongbo Lu<sup>2,3</sup>,</span>
+        <span class="author-block">Chuanyi Zhang<sup>1</sup>,</span>
+        <span class="author-block">Rui Min<sup>1</sup>,</span>
+        <span class="author-block">Shengxiang Xu<sup>4</sup>,</span>
+        <span class="author-block">Shimin Di<sup>4</sup>,</span>
+        <span class="author-block">Pai Peng<sup>3,&dagger;</sup></span>
+      </div>
+
+      <div class="is-size-5 publication-authors affiliations">
+        <span class="author-block"><sup>1</sup>Hohai University</span>
+        <span class="author-block"><sup>2</sup>Shanghai Jiao Tong University</span>
+        <span class="author-block"><sup>3</sup>COWARobot Co. Ltd.</span>
+        <span class="author-block"><sup>4</sup>Southeast University</span>
+      </div>
+
+      <p class="publication-note">* Equal contribution. &dagger; Corresponding authors.</p>
+
+      <div class="publication-links">
+        <span class="link-block">
+          <a href="./static/remote_reasoner_paper.pdf"
+             class="external-link button is-normal is-rounded is-dark">
+            <span class="icon">
+              <i class="fas fa-file-pdf"></i>
+            </span>
+            <span>Paper</span>
+          </a>
+        </span>
+        <span class="link-block">
+          <a href="https://github.com/1e12Leon/RemoteReasoner"
+             class="external-link button is-normal is-rounded is-dark">
+            <span class="icon">
+              <i class="fab fa-github"></i>
+            </span>
+            <span>Code</span>
+          </a>
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section compact-section" id="abstract">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 section-title">Abstract</h2>
+    <div class="content abstract-text">
+      <p>
+        Remote sensing imagery presents vast, inherently unstructured spatial data, necessitating sophisticated reasoning to interpret complex user intents and contextual relationships beyond simple recognition tasks. In this paper, we aim to construct an Earth observation workflow to handle complex queries by reasoning about spatial context and user intent. As a reasoning workflow, it should autonomously explore and construct its own inference paths, rather than being confined to predefined ground-truth sequences. Ideally, its architecture ought to be unified yet generalized, possessing capabilities to perform diverse reasoning tasks through one model without requiring additional fine-tuning. Existing remote sensing approaches rely on supervised fine-tuning paradigms and task-specific heads, limiting both autonomous reasoning and unified generalization. To this end, we propose RemoteReasoner, a unified workflow for geospatial reasoning. The design of RemoteReasoner integrates a multi-modal large language model (MLLM) for interpreting user instructions and localizing targets, together with task transformation strategies that enable multi-granularity tasks, including object-, region-, and pixel-level. In contrast to existing methods, our framework is trained with reinforcement learning (RL) to endow the MLLM sufficient reasoning autonomy. At the inference stage, our transformation strategies enable diverse task output formats without requiring task-specific decoders or further fine-tuning. Experiments demonstrated that RemoteReasoner achieves state-of-the-art performance across multi-granularity reasoning tasks. Furthermore, it retains the MLLM’s inherent generalization capability, demonstrating robust performance on unseen tasks and categories.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="section compact-section" id="architecture">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 section-title">Architecture</h2>
+    <div class="content overview-text">
+      <p>
+        Overview of our RemoteReasoner. We utilize GRPO (Shao et al. 2024) to explore the model’s self-thinking capability. Then we design an inference workflow to perform multi-granularity reasoning tasks.
+      </p>
+    </div>
+
+    <figure class="paper-figure">
+      <img src="./static/images/remote_reasoner_figures/figure2_overview.png"
+           alt="RemoteReasoner overview diagram.">
+    </figure>
+  </div>
+</section>
+
+<section class="section compact-section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 section-title">🏆Contributions</h2>
+    <div class="content">
+      <ul class="highlight-list">
+        <li><strong>Unified geospatial reasoning workflow.</strong> We propose RemoteResoner, a unified yet generalized  reasoning workflow for Earth observation, which reveals that integrating pure RL and task transformation strategies could handle multi-granularity reasoning tasks.</li>
+        <li><strong>New reasoning tasks and datasets.</strong> We introduce two novel geospatial reasoning tasks, region reasoning and contour reasoning. We also provide the corresponding precisely annotated datasets to facilitate the advancement of remote sensing research.</li>
+        <li><strong>Holistic evaluation.</strong> Holistic evaluations demonstrate that RemoteReasoner achieves superior generalization capabilities and efficiency in handling multi-granularity reasoning tasks through a single forward pass.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section compact-section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 section-title">Multi-granularity Reasoning</h2>
+    <div class="content">
+      <p>
+        The same reasoning output supports three visual products: bounding boxes for region reasoning, masks for
+        pixel-level reasoning, and polygonal contours for object-level reasoning.
+      </p>
+    </div>
+
+    <figure class="paper-figure">
+      <img src="./static/images/remote_reasoner_figures/figure5_qualitative.png"
+           alt="Qualitative multi-granularity geospatial reasoning results.">
+      <figcaption>Given an image and its corresponding implicit query, RemoteReasoner autonomously identiffes
+the user-intended target category through reasoning and accurately executes visual-centric tasks across three granularities.
+</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="section compact-section" id="results">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 section-title">Main Results</h2>
+    <div class="content">
+      <p>
+        RemoteReasoner reaches strong performance across EarthReason pixel, region, and contour reasoning. It also
+        retains useful zero-shot behavior on unseen tasks and categories, while target-specific mask-to-contour
+        transformation avoids extra boundaries and produces sharper object outlines.
+      </p>
+    </div>
+
+    <div id="main-results-carousel" class="carousel results-carousel">
+      <div class="item">
+        <div class="result-frame">
+          <img src="./static/images/remote_reasoner_figures/table1_pixel_results.png"
+               alt="Geospatial pixel reasoning results.">
+        </div>
+        <p class="carousel-caption">Geospatial Pixel Reasoning Results on EarthReason. It is worth noting that RemoteReasoner was not trained directly utilizing its segmentation labels.</p>
+      </div>
+      <div class="item">
+        <div class="result-frame">
+          <img src="./static/images/remote_reasoner_figures/table2_region_results.png"
+               alt="Geospatial region reasoning results.">
+        </div>
+        <p class="carousel-caption">Geospatial Region Reasoning Results.</p>
+      </div>
+      <div class="item">
+        <div class="result-frame">
+          <img src="./static/images/remote_reasoner_figures/figure2_qualitative.png"
+               alt="Contour reasoning qualitative comparison.">
+        </div>
+        <p class="carousel-caption">Geospatial Contour Reasoning Results. We select EPOC (Chen et al. 2024a) for comparison.</p>
+      </div>
+      <div class="item">
+        <div class="result-frame">
+          <img src="./static/images/remote_reasoner_figures/table4_unseen_tasks.png"
+               alt="Performance on unseen tasks and categories.">
+        </div>
+        <p class="carousel-caption">Performance on unseen tasks. VG and RES are Visual Grounding and Referring Expression Segmentation.</p>
+      </div>
+      <div class="item">
+        <div class="result-frame">
+          <img src="./static/images/remote_reasoner_figures/figure3_qualitative.png"
+               alt="Contour reasoning qualitative comparison.">
+        </div>
+        <p class="carousel-caption">Quantitative results of other tasks (Image Captioning & VQA).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section compact-section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 section-title">Ablation Studies</h2>
+    <div class="content">
+      <p>
+        The paper studies data scaling and contour-extraction cost. Larger reasoning datasets keep improving
+        performance, while Mask2Contour is faster and parameter-free compared with model-based contour extraction.
+      </p>
+    </div>
+
+    <figure class="paper-figure">
+      <img src="./static/images/remote_reasoner_figures/figure6_scaling_cost.png"
+           alt="Data scaling and inference cost experiments.">
+      <figcaption>(a) Data scaling experiment. We observed that the model performance increases as the data scales exponentially. (b) Inference cost experiment. Mask2Coutour method achieved significantly faster inference speed.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="section compact-section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title is-3 section-title">BibTeX</h2>
+    <pre><code>@article{yao2025remotereasoner,
+  title={RemoteReasoner: Towards Unifying Geospatial Reasoning Workflow},
+  author={Yao, Liang and Liu, Fan and Lu, Hongbo and Zhang, Chuanyi and Min, Rui and Xu, Shengxiang and Di, Shimin and Peng, Pai},
+  journal={arXiv preprint arXiv:2507.19280},
+  year={2025}
+}</code></pre>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <p>
+        This website is adapted from <a href="https://nerfies.github.io">Nerfies</a>, 
+        licensed under a <a href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+      </p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

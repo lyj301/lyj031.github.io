@@ -103,6 +103,31 @@ body {
   margin-bottom: 0.45rem;
 }
 
+.dataset-grid {
+  margin-top: 1rem;
+}
+
+.dataset-card {
+  height: 100%;
+  border: 1px solid #dfe4ea;
+  border-radius: 6px;
+  background: #fbfcfe;
+  padding: 1rem;
+}
+
+.dataset-card .title {
+  color: #235d77;
+  font-family: 'Google Sans', sans-serif;
+  margin-bottom: 0.45rem;
+}
+
+.dataset-card p {
+  color: #4f5965;
+  font-size: 0.98rem;
+  line-height: 1.45;
+  margin-bottom: 0;
+}
+
 .paper-figure {
   margin: 1.25rem auto 0;
   text-align: center;

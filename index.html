@@ -3,31 +3,441 @@
 <head>
   <meta charset="utf-8">
   <meta name="description"
-        content="RemoteReasoner is a unified geospatial reasoning workflow for region, pixel, and contour reasoning in remote sensing imagery.">
-  <meta name="keywords" content="RemoteReasoner, geospatial reasoning, remote sensing, MLLM, reinforcement learning">
+        content="Remote Family collects five Earth Observation research project pages: RemoteReasoner, RemoteShield, RemoteSAM, RemoteAgent, and RemoteCLIP.">
+  <meta name="keywords" content="RemoteFamily, RemoteReasoner, RemoteShield, RemoteSAM, RemoteAgent, RemoteCLIP, remote sensing, Earth Observation">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>RemoteReasoner</title>
+  <title>Remote Family</title>
 
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
         rel="stylesheet">
 
   <link rel="stylesheet" href="./static/css/bulma.min.css">
-  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
   <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
-  <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
-  <link rel="icon" href="./static/images/remote_reasoner_figures/logo.jpg">
+  <link rel="icon" href="./static/images/logo.jpg">
 
   <script defer src="./static/js/fontawesome.all.min.js"></script>
-  <script src="./static/js/bulma-carousel.min.js"></script>
   <script src="./static/js/index.js"></script>
+
+  <style>
+    :root {
+      --ink: #18212b;
+      --muted: #5e6875;
+      --line: #dfe5eb;
+      --panel: #fbfcfd;
+      --blue: #1e6786;
+      --green: #3a7c5b;
+      --amber: #a96a2c;
+      --red: #aa4e45;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #ffffff;
+      color: var(--ink);
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      box-shadow: 0 1px 0 rgba(18, 30, 41, 0.06);
+    }
+
+    .navbar-item img {
+      max-height: 1.9rem;
+      margin-right: 0.5rem;
+      border-radius: 4px;
+    }
+
+    .family-hero {
+      position: relative;
+      min-height: 68vh;
+      display: flex;
+      align-items: flex-end;
+      background-image:
+        linear-gradient(90deg, rgba(12, 22, 30, 0.82), rgba(12, 22, 30, 0.42), rgba(12, 22, 30, 0.1)),
+        url("./static/images/remote-family-hero.jpg");
+      background-position: center;
+      background-size: cover;
+      isolation: isolate;
+    }
+
+    .family-hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.08);
+      z-index: -1;
+    }
+
+    .hero-copy {
+      width: 100%;
+      padding: 5rem 1.5rem 4.5rem;
+    }
+
+    .hero-copy .container {
+      max-width: 980px;
+    }
+
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      color: #dce9ef;
+      font-family: 'Google Sans', sans-serif;
+      font-weight: 700;
+      margin-bottom: 0.85rem;
+    }
+
+    .hero-kicker::before {
+      content: "";
+      width: 2.4rem;
+      height: 2px;
+      background: #8bc4cc;
+    }
+
+    .family-title {
+      max-width: 820px;
+      color: #ffffff;
+      font-family: 'Google Sans', sans-serif;
+      font-size: 4rem;
+      line-height: 1.03;
+      letter-spacing: 0;
+      margin-bottom: 1rem;
+      text-shadow: 0 2px 16px rgba(0, 0, 0, 0.35);
+    }
+
+    .family-subtitle {
+      max-width: 780px;
+      color: #eef6f7;
+      font-size: 1.22rem;
+      line-height: 1.55;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .hero-actions .button {
+      border-radius: 6px;
+      font-weight: 700;
+    }
+
+    .hero-actions .button.is-light {
+      border: 1px solid rgba(255, 255, 255, 0.82);
+    }
+
+    .section-label {
+      color: var(--blue);
+      font-family: 'Google Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0;
+      text-transform: uppercase;
+      margin-bottom: 0.45rem;
+    }
+
+    .section-heading {
+      font-family: 'Google Sans', sans-serif;
+      font-size: 2.2rem;
+      line-height: 1.15;
+      letter-spacing: 0;
+      margin-bottom: 0.85rem;
+    }
+
+    .section-copy {
+      color: var(--muted);
+      font-size: 1.06rem;
+      line-height: 1.7;
+    }
+
+    .family-wide-container {
+      width: min(calc(100% - 2rem), 1180px);
+      max-width: 1180px;
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .metric {
+      min-height: 112px;
+      padding: 1rem;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+
+    .metric strong {
+      display: block;
+      color: var(--ink);
+      font-family: 'Google Sans', sans-serif;
+      font-size: 1.55rem;
+      line-height: 1.1;
+      margin-bottom: 0.35rem;
+    }
+
+    .metric span {
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    .overview-figures {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .overview-figure {
+      margin: 0;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #ffffff;
+      overflow: hidden;
+    }
+
+    .overview-figure img {
+      display: block;
+      width: 100%;
+      height: 260px;
+      object-fit: contain;
+      padding: 1rem;
+      background: #ffffff;
+    }
+
+    .overview-figure figcaption {
+      min-height: 64px;
+      display: flex;
+      align-items: center;
+      padding: 0.75rem 1rem;
+      border-top: 1px solid #edf0f3;
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+
+    .project-list {
+      display: grid;
+      gap: 1.25rem;
+      margin-top: 1.5rem;
+    }
+
+    .project-card {
+      display: grid;
+      grid-template-columns: minmax(420px, 52%) minmax(0, 1fr);
+      min-height: 300px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #ffffff;
+      overflow: hidden;
+    }
+
+    .project-media {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      min-height: 300px;
+      padding: 1rem;
+      background: #f7f9fb;
+      border-right: 1px solid var(--line);
+      overflow: hidden;
+    }
+
+    .project-media img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      max-height: 100%;
+      min-height: 260px;
+      object-fit: contain;
+      object-position: center;
+    }
+
+    .project-body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-width: 0;
+      padding: 1.5rem;
+    }
+
+    .project-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 0.65rem;
+    }
+
+    .project-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.25rem;
+      height: 2.25rem;
+      border-radius: 50%;
+      background: var(--ink);
+      color: #ffffff;
+      font-family: 'Google Sans', sans-serif;
+      font-weight: 700;
+    }
+
+    .project-venue {
+      color: var(--blue);
+      font-family: 'Google Sans', sans-serif;
+      font-weight: 700;
+    }
+
+    .project-title {
+      font-family: 'Google Sans', sans-serif;
+      font-size: 1.65rem;
+      line-height: 1.2;
+      letter-spacing: 0;
+      margin-bottom: 0.65rem;
+      overflow-wrap: anywhere;
+    }
+
+    .project-desc {
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.62;
+      margin-bottom: 1rem;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-bottom: 1.1rem;
+    }
+
+    .tag-row span {
+      display: inline-flex;
+      align-items: center;
+      min-height: 1.8rem;
+      padding: 0.25rem 0.55rem;
+      border-radius: 999px;
+      background: #eff5f4;
+      color: #315d55;
+      font-size: 0.84rem;
+      line-height: 1.2;
+    }
+
+    .project-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+    }
+
+    .project-actions .button {
+      border-radius: 6px;
+      min-width: 7.4rem;
+      font-weight: 700;
+    }
+
+    .project-card.reasoner .project-number {
+      background: var(--blue);
+    }
+
+    .project-card.shield .project-number {
+      background: var(--green);
+    }
+
+    .project-card.sam .project-number {
+      background: var(--amber);
+    }
+
+    .project-card.agent .project-number {
+      background: var(--red);
+    }
+
+    .project-card.clip .project-number {
+      background: #4b6178;
+    }
+
+    .family-footer {
+      padding: 2rem 1.5rem;
+      border-top: 1px solid #edf0f3;
+      color: var(--muted);
+      font-size: 0.95rem;
+      text-align: center;
+    }
+
+    @media screen and (max-width: 900px) {
+      .family-title {
+        font-size: 3rem;
+      }
+
+      .metric-grid,
+      .overview-figures {
+        grid-template-columns: 1fr;
+      }
+
+      .project-card {
+        grid-template-columns: 1fr;
+      }
+
+      .project-media {
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+    }
+
+    @media screen and (max-width: 560px) {
+      .family-hero {
+        min-height: 62vh;
+      }
+
+      .hero-copy {
+        padding: 3.6rem 1rem 3rem;
+      }
+
+      .family-title {
+        font-size: 2.25rem;
+      }
+
+      .family-subtitle {
+        font-size: 1rem;
+      }
+
+      .section-heading {
+        font-size: 1.7rem;
+      }
+
+      .project-body {
+        padding: 1.15rem;
+      }
+
+      .project-title {
+        font-size: 1.35rem;
+      }
+
+      .project-actions .button {
+        width: 100%;
+      }
+    }
+  </style>
 </head>
 <body>
 
 <nav class="navbar is-white" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
-    <a class="navbar-item" href="#top">RemoteReasoner</a>
+    <a class="navbar-item" href="#top">
+      <img src="./static/images/logo.jpg" alt="Hohai University logo">
+      <strong>RemoteFamily</strong>
+    </a>
     <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
@@ -36,213 +446,238 @@
   </div>
   <div class="navbar-menu">
     <div class="navbar-end">
-      <a class="navbar-item" href="#abstract">Abstract</a>
-      <a class="navbar-item" href="#architecture">Architecture</a>
-      <a class="navbar-item" href="#results">Results</a>
-      <a class="navbar-item" href="#BibTeX">BibTeX</a>
+      <a class="navbar-item" href="#overview">Overview</a>
+      <a class="navbar-item" href="#projects">Projects</a>
     </div>
   </div>
 </nav>
 
-<section class="hero" id="top">
-  <div class="hero-body">
-    <div class="container is-max-desktop has-text-centered">
-      <h1 class="title is-1 publication-title">RemoteReasoner: Towards Unifying Geospatial Reasoning Workflow</h1>
-      <p class="subtitle is-4 venue">AAAI 2026</p>
-
-      <div class="is-size-5 publication-authors">
-        <span class="author-block">Liang Yao<sup>1,*</sup>,</span>
-        <span class="author-block">Fan Liu<sup>1,*&dagger;</sup>,</span>
-        <span class="author-block">Hongbo Lu<sup>2,3</sup>,</span>
-        <span class="author-block">Chuanyi Zhang<sup>1</sup>,</span>
-        <span class="author-block">Rui Min<sup>1</sup>,</span>
-        <span class="author-block">Shengxiang Xu<sup>4</sup>,</span>
-        <span class="author-block">Shimin Di<sup>4</sup>,</span>
-        <span class="author-block">Pai Peng<sup>3,&dagger;</sup></span>
-      </div>
-
-      <div class="is-size-5 publication-authors affiliations">
-        <span class="author-block"><sup>1</sup>Hohai University</span>
-        <span class="author-block"><sup>2</sup>Shanghai Jiao Tong University</span>
-        <span class="author-block"><sup>3</sup>COWARobot Co. Ltd.</span>
-        <span class="author-block"><sup>4</sup>Southeast University</span>
-      </div>
-
-      <p class="publication-note">* Equal contribution. &dagger; Corresponding authors.</p>
-
-      <div class="publication-links">
-        <span class="link-block">
-          <a href="./static/remote_reasoner_paper.pdf"
-             class="external-link button is-normal is-rounded is-dark">
-            <span class="icon">
-              <i class="fas fa-file-pdf"></i>
-            </span>
-            <span>Paper</span>
-          </a>
-        </span>
-        <span class="link-block">
-          <a href="https://github.com/1e12Leon/RemoteReasoner"
-             class="external-link button is-normal is-rounded is-dark">
-            <span class="icon">
-              <i class="fab fa-github"></i>
-            </span>
-            <span>Code</span>
-          </a>
-        </span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section compact-section" id="abstract">
-  <div class="container is-max-desktop">
-    <h2 class="title is-3 section-title">Abstract</h2>
-    <div class="content abstract-text">
-      <p>
-        Remote sensing imagery presents vast, inherently unstructured spatial data, necessitating sophisticated reasoning to interpret complex user intents and contextual relationships beyond simple recognition tasks. In this paper, we aim to construct an Earth observation workflow to handle complex queries by reasoning about spatial context and user intent. As a reasoning workflow, it should autonomously explore and construct its own inference paths, rather than being confined to predefined ground-truth sequences. Ideally, its architecture ought to be unified yet generalized, possessing capabilities to perform diverse reasoning tasks through one model without requiring additional fine-tuning. Existing remote sensing approaches rely on supervised fine-tuning paradigms and task-specific heads, limiting both autonomous reasoning and unified generalization. To this end, we propose RemoteReasoner, a unified workflow for geospatial reasoning. The design of RemoteReasoner integrates a multi-modal large language model (MLLM) for interpreting user instructions and localizing targets, together with task transformation strategies that enable multi-granularity tasks, including object-, region-, and pixel-level. In contrast to existing methods, our framework is trained with reinforcement learning (RL) to endow the MLLM sufficient reasoning autonomy. At the inference stage, our transformation strategies enable diverse task output formats without requiring task-specific decoders or further fine-tuning. Experiments demonstrated that RemoteReasoner achieves state-of-the-art performance across multi-granularity reasoning tasks. Furthermore, it retains the MLLM’s inherent generalization capability, demonstrating robust performance on unseen tasks and categories.
+<section class="family-hero" id="top">
+  <div class="hero-copy">
+    <div class="container">
+      <div class="hero-kicker">Earth Observation Research Pages</div>
+      <h1 class="family-title">RemoteFamily</h1>
+      <p class="family-subtitle">
+        A collection of remote sensing foundation-model projects spanning vision-language pretraining,
+        segmentation-centered perception, robust multimodal reasoning, unified geospatial reasoning, and agentic
+        Earth Observation workflows.
       </p>
-    </div>
-  </div>
-</section>
-
-<section class="section compact-section" id="architecture">
-  <div class="container is-max-desktop">
-    <h2 class="title is-3 section-title">Architecture</h2>
-    <div class="content overview-text">
-      <p>
-        Overview of our RemoteReasoner. We utilize GRPO (Shao et al. 2024) to explore the model’s self-thinking capability. Then we design an inference workflow to perform multi-granularity reasoning tasks.
-      </p>
-    </div>
-
-    <figure class="paper-figure">
-      <img src="./static/images/remote_reasoner_figures/figure2_overview.png"
-           alt="RemoteReasoner overview diagram.">
-    </figure>
-  </div>
-</section>
-
-<section class="section compact-section">
-  <div class="container is-max-desktop">
-    <h2 class="title is-3 section-title">🏆Contributions</h2>
-    <div class="content">
-      <ul class="highlight-list">
-        <li><strong>Unified geospatial reasoning workflow.</strong> We propose RemoteResoner, a unified yet generalized  reasoning workflow for Earth observation, which reveals that integrating pure RL and task transformation strategies could handle multi-granularity reasoning tasks.</li>
-        <li><strong>New reasoning tasks and datasets.</strong> We introduce two novel geospatial reasoning tasks, region reasoning and contour reasoning. We also provide the corresponding precisely annotated datasets to facilitate the advancement of remote sensing research.</li>
-        <li><strong>Holistic evaluation.</strong> Holistic evaluations demonstrate that RemoteReasoner achieves superior generalization capabilities and efficiency in handling multi-granularity reasoning tasks through a single forward pass.</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<section class="section compact-section">
-  <div class="container is-max-desktop">
-    <h2 class="title is-3 section-title">Multi-granularity Reasoning</h2>
-    <div class="content">
-      <p>
-        The same reasoning output supports three visual products: bounding boxes for region reasoning, masks for
-        pixel-level reasoning, and polygonal contours for object-level reasoning.
-      </p>
-    </div>
-
-    <figure class="paper-figure">
-      <img src="./static/images/remote_reasoner_figures/figure5_qualitative.png"
-           alt="Qualitative multi-granularity geospatial reasoning results.">
-      <figcaption>Given an image and its corresponding implicit query, RemoteReasoner autonomously identiffes
-the user-intended target category through reasoning and accurately executes visual-centric tasks across three granularities.
-</figcaption>
-    </figure>
-  </div>
-</section>
-
-<section class="section compact-section" id="results">
-  <div class="container is-max-desktop">
-    <h2 class="title is-3 section-title">Main Results</h2>
-    <div class="content">
-      <p>
-        RemoteReasoner reaches strong performance across EarthReason pixel, region, and contour reasoning. It also
-        retains useful zero-shot behavior on unseen tasks and categories, while target-specific mask-to-contour
-        transformation avoids extra boundaries and produces sharper object outlines.
-      </p>
-    </div>
-
-    <div id="main-results-carousel" class="carousel results-carousel">
-      <div class="item">
-        <div class="result-frame">
-          <img src="./static/images/remote_reasoner_figures/table1_pixel_results.png"
-               alt="Geospatial pixel reasoning results.">
-        </div>
-        <p class="carousel-caption">Geospatial Pixel Reasoning Results on EarthReason. It is worth noting that RemoteReasoner was not trained directly utilizing its segmentation labels.</p>
-      </div>
-      <div class="item">
-        <div class="result-frame">
-          <img src="./static/images/remote_reasoner_figures/table2_region_results.png"
-               alt="Geospatial region reasoning results.">
-        </div>
-        <p class="carousel-caption">Geospatial Region Reasoning Results.</p>
-      </div>
-      <div class="item">
-        <div class="result-frame">
-          <img src="./static/images/remote_reasoner_figures/figure2_qualitative.png"
-               alt="Contour reasoning qualitative comparison.">
-        </div>
-        <p class="carousel-caption">Geospatial Contour Reasoning Results. We select EPOC (Chen et al. 2024a) for comparison.</p>
-      </div>
-      <div class="item">
-        <div class="result-frame">
-          <img src="./static/images/remote_reasoner_figures/table4_unseen_tasks.png"
-               alt="Performance on unseen tasks and categories.">
-        </div>
-        <p class="carousel-caption">Performance on unseen tasks. VG and RES are Visual Grounding and Referring Expression Segmentation.</p>
-      </div>
-      <div class="item">
-        <div class="result-frame">
-          <img src="./static/images/remote_reasoner_figures/figure3_qualitative.png"
-               alt="Contour reasoning qualitative comparison.">
-        </div>
-        <p class="carousel-caption">Quantitative results of other tasks (Image Captioning & VQA).</p>
+      <div class="hero-actions">
+        <a class="button is-light" href="#projects">
+          <span class="icon"><i class="fas fa-layer-group"></i></span>
+          <span>Browse Projects</span>
+        </a>
+        <a class="button is-dark" href="#overview">
+          <span class="icon"><i class="fas fa-globe-asia"></i></span>
+          <span>Overview</span>
+        </a>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section compact-section">
-  <div class="container is-max-desktop">
-    <h2 class="title is-3 section-title">Ablation Studies</h2>
-    <div class="content">
-      <p>
-        The paper studies data scaling and contour-extraction cost. Larger reasoning datasets keep improving
-        performance, while Mask2Contour is faster and parameter-free compared with model-based contour extraction.
-      </p>
+<section class="section" id="projects">
+  <div class="container family-wide-container">
+    <h2 class="section-heading">Our Works</h2>
+    <p class="section-copy">
+      Each card links to one local project page and keeps direct access to the paper and code when available.
+    </p>
+
+    <div class="project-list">
+      <article class="project-card reasoner">
+        <div class="project-media">
+          <img src="./static/images/RemoteReasoner/figure2_overview.png"
+               alt="RemoteReasoner framework overview.">
+        </div>
+        <div class="project-body">
+          <div class="project-meta">
+            <span class="project-number">1</span>
+            <span class="project-venue">AAAI 2026</span>
+          </div>
+          <h3 class="project-title">RemoteReasoner: Towards Unifying Geospatial Reasoning Workflow</h3>
+          <p class="project-desc">
+            A unified geospatial reasoning workflow that handles region, pixel, and contour reasoning with task
+            transformation strategies and reinforcement learning alignment.
+          </p>
+          <div class="tag-row">
+            <span>Geospatial reasoning</span>
+            <span>MLLM</span>
+            <span>RL alignment</span>
+          </div>
+          <div class="project-actions">
+            <a class="button is-dark" href="index1.html">
+              <span class="icon"><i class="fas fa-arrow-right"></i></span>
+              <span>View Page</span>
+            </a>
+            <a class="button is-light" href="https://arxiv.org/abs/2507.19280" target="_blank" rel="noopener noreferrer">
+              <span class="icon"><i class="fas fa-file-pdf"></i></span>
+              <span>Paper</span>
+            </a>
+            <a class="button is-light" href="https://github.com/1e12Leon/RemoteReasoner" target="_blank" rel="noopener noreferrer">
+              <span class="icon"><i class="fab fa-github"></i></span>
+              <span>Code</span>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <article class="project-card shield">
+        <div class="project-media">
+          <img src="./static/images/RemoteShield/overview.png"
+               alt="RemoteShield robust alignment overview.">
+        </div>
+        <div class="project-body">
+          <div class="project-meta">
+            <span class="project-number">2</span>
+            <span class="project-venue">arXiv 2026</span>
+          </div>
+          <h3 class="project-title">RemoteShield: Enable Robust Multimodal Large Language Models for Earth Observation</h3>
+          <p class="project-desc">
+            A robustness-oriented remote sensing MLLM trained to keep stable outputs under realistic visual degradation
+            and human-centric text perturbations.
+          </p>
+          <div class="tag-row">
+            <span>Robustness</span>
+            <span>Preference learning</span>
+            <span>Perturbation</span>
+          </div>
+          <div class="project-actions">
+            <a class="button is-dark" href="index2.html">
+              <span class="icon"><i class="fas fa-arrow-right"></i></span>
+              <span>View Page</span>
+            </a>
+            <a class="button is-light" href="./static/remoteshield_paper.pdf">
+              <span class="icon"><i class="fas fa-file-pdf"></i></span>
+              <span>Paper</span>
+            </a>
+            <a class="button is-light" href="https://github.com/SteveJoker404/RemoteShield" target="_blank" rel="noopener noreferrer">
+              <span class="icon"><i class="fab fa-github"></i></span>
+              <span>Code</span>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <article class="project-card sam">
+        <div class="project-media">
+          <img src="./static/images/RemoteSAM/fig4.png"
+               alt="RemoteSAM architecture overview.">
+        </div>
+        <div class="project-body">
+          <div class="project-meta">
+            <span class="project-number">3</span>
+            <span class="project-venue">MM 2025</span>
+          </div>
+          <h3 class="project-title">RemoteSAM: Towards Segment Anything for Earth Observation</h3>
+          <p class="project-desc">
+            A referring segmentation-centered foundation model that unifies classification, detection, segmentation,
+            grounding, counting, and captioning through one compact architecture.
+          </p>
+          <div class="tag-row">
+            <span>Segmentation</span>
+            <span>Foundation model</span>
+            <span>RemoteSAM-270K</span>
+          </div>
+          <div class="project-actions">
+            <a class="button is-dark" href="index3.html">
+              <span class="icon"><i class="fas fa-arrow-right"></i></span>
+              <span>View Page</span>
+            </a>
+            <a class="button is-light" href="./static/remotesam_paper.pdf">
+              <span class="icon"><i class="fas fa-file-pdf"></i></span>
+              <span>Paper</span>
+            </a>
+            <a class="button is-light" href="https://github.com/1e12Leon/RemoteSAM" target="_blank" rel="noopener noreferrer">
+              <span class="icon"><i class="fab fa-github"></i></span>
+              <span>Code</span>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <article class="project-card agent">
+        <div class="project-media">
+          <img src="./static/images/RemoteAgent/fig2.png"
+               alt="RemoteAgent training and inference framework.">
+        </div>
+        <div class="project-body">
+          <div class="project-meta">
+            <span class="project-number">4</span>
+            <span class="project-venue">arXiv 2026</span>
+          </div>
+          <h3 class="project-title">RemoteAgent: Bridging Vague Human Intents and Earth Observation with RL-based Agentic MLLMs</h3>
+          <p class="project-desc">
+            An agentic EO framework that interprets vague user queries, solves suitable tasks internally, and routes
+            dense precision-critical tasks to specialized tools.
+          </p>
+          <div class="tag-row">
+            <span>Agentic MLLM</span>
+            <span>VagueEO</span>
+            <span>Tool routing</span>
+          </div>
+          <div class="project-actions">
+            <a class="button is-dark" href="index4.html">
+              <span class="icon"><i class="fas fa-arrow-right"></i></span>
+              <span>View Page</span>
+            </a>
+            <a class="button is-light" href="./static/remoteagent_paper.pdf">
+              <span class="icon"><i class="fas fa-file-pdf"></i></span>
+              <span>Paper</span>
+            </a>
+            <a class="button is-light" href="https://github.com/1e12Leon/RemoteAgent" target="_blank" rel="noopener noreferrer">
+              <span class="icon"><i class="fab fa-github"></i></span>
+              <span>Code</span>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <article class="project-card clip">
+        <div class="project-media">
+          <img src="./static/images/RemoteCLIP/fig1.png"
+               alt="RemoteCLIP data scaling and evaluation pipeline.">
+        </div>
+        <div class="project-body">
+          <div class="project-meta">
+            <span class="project-number">5</span>
+            <span class="project-venue">TGRS 2024</span>
+          </div>
+          <h3 class="project-title">RemoteCLIP: A Vision Language Foundation Model for Remote Sensing</h3>
+          <p class="project-desc">
+            A vision-language foundation model for remote sensing trained with scaled image-text data and evaluated
+            across retrieval, classification, counting, and transfer tasks.
+          </p>
+          <div class="tag-row">
+            <span>Vision-language</span>
+            <span>Data scaling</span>
+            <span>RemoteCount</span>
+          </div>
+          <div class="project-actions">
+            <a class="button is-dark" href="index5.html">
+              <span class="icon"><i class="fas fa-arrow-right"></i></span>
+              <span>View Page</span>
+            </a>
+            <a class="button is-light" href="./static/remoteclip_paper.pdf">
+              <span class="icon"><i class="fas fa-file-pdf"></i></span>
+              <span>Paper</span>
+            </a>
+            <a class="button is-light" href="https://github.com/ChenDelong1999/RemoteCLIP" target="_blank" rel="noopener noreferrer">
+              <span class="icon"><i class="fab fa-github"></i></span>
+              <span>Code</span>
+            </a>
+          </div>
+        </div>
+      </article>
     </div>
-
-    <figure class="paper-figure">
-      <img src="./static/images/remote_reasoner_figures/figure6_scaling_cost.png"
-           alt="Data scaling and inference cost experiments.">
-      <figcaption>(a) Data scaling experiment. We observed that the model performance increases as the data scales exponentially. (b) Inference cost experiment. Mask2Coutour method achieved significantly faster inference speed.</figcaption>
-    </figure>
   </div>
 </section>
 
-<section class="section compact-section" id="BibTeX">
-  <div class="container is-max-desktop content">
-    <h2 class="title is-3 section-title">BibTeX</h2>
-    <pre><code>@article{yao2025remotereasoner,
-  title={RemoteReasoner: Towards Unifying Geospatial Reasoning Workflow},
-  author={Yao, Liang and Liu, Fan and Lu, Hongbo and Zhang, Chuanyi and Min, Rui and Xu, Shengxiang and Di, Shimin and Peng, Pai},
-  journal={arXiv preprint arXiv:2507.19280},
-  year={2025}
-}</code></pre>
-  </div>
-</section>
-
-<footer class="footer">
+<footer class="family-footer">
   <div class="container">
-    <div class="content has-text-centered">
-      <p>
-        This website is adapted from <a href="https://nerfies.github.io">Nerfies</a>, 
-        licensed under a <a href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
-      </p>
-    </div>
+    <p>
+      Remote Family homepage. Individual project pages are adapted from the Nerfies-style research page template.
+      Hero image: NASA/USGS Landsat 9 via Wikimedia Commons.
+    </p>
   </div>
 </footer>
 

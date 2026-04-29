@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="RemoteSAM is a referring segmentation-centered visual foundation model for Earth Observation.">
+  <meta name="keywords" content="RemoteSAM, RemoteSAM-270K, Earth Observation, remote sensing, referring expression segmentation, foundation model">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RemoteSAM</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/logo.jpg">
+
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar is-white" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="#top">RemoteSAM</a>
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-end">
+      <a class="navbar-item" href="#abstract">Abstract</a>
+      <a class="navbar-item" href="#architecture">Architecture</a>
+      <a class="navbar-item" href="#dataset">Dataset</a>
+      <a class="navbar-item" href="#results">Results</a>
+      <a class="navbar-item" href="#BibTeX">BibTeX</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero" id="top">
+  <div class="hero-body">
+    <div class="container is-max-desktop has-text-centered">
+      <h1 class="title is-1 publication-title">RemoteSAM: Towards Segment Anything for Earth Observation</h1>
+      <p class="subtitle is-4 venue">MM 2025</p>
+
+      <div class="is-size-5 publication-authors">
+        <span class="author-block">Liang Yao<sup>1,*</sup>,</span>
+        <span class="author-block">Fan Liu<sup>1,*&dagger;</sup>,</span>
+        <span class="author-block">Delong Chen<sup>2,*</sup>,</span>
+        <span class="author-block">Chuanyi Zhang<sup>1</sup>,</span>
+        <span class="author-block">Yijun Wang<sup>1</sup>,</span>
+        <span class="author-block">Ziyun Chen<sup>1</sup>,</span>
+        <span class="author-block">Wei Xu<sup>1</sup>,</span>
+        <span class="author-block">Shimin Di<sup>3</sup>,</span>
+        <span class="author-block">Yuhui Zheng<sup>1</sup></span>
+      </div>
+
+      <div class="is-size-5 publication-authors affiliations">
+        <span class="author-block"><sup>1</sup>Hohai University</span>
+        <span class="author-block"><sup>2</sup>HKUST</span>
+        <span class="author-block"><sup>3</sup>Southeast University</span>
+      </div>
+
+      <p class="publication-note">* Equal contribution. &dagger; Corresponding author.</p>
+
+      <div class="publication-links">
+        <span class="link-block">
+          <a href="./static/remotesam_paper.pdf"
+             class="external-link button is-normal is-rounded is-dark">
+            <span class="icon">
+              <i class="fas fa-file-pdf"></i>
+            </span>
+            <span>Paper</span>
+          </a>
+        </span>
+        <span class="link-block">
+          <a href="https://github.com/1e12Leon/RemoteSAM"
+             class="external-link button is-normal is-rounded is-dark">
+            <span class="icon">
+              <i class="fab fa-github"></i>
+            </span>
+            <span>Code</span>
+          </a>
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section compact-section" id="abstract">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 section-title">Abstract</h2>
+    <div class="content abstract-text">
+      <p>
+       We aim to develop a robust yet flexible visual foundation model for Earth observation. It should possess strong capabilities in recognizing and localizing diverse visual targets while providing compatibility with various input-output interfaces required across different task scenarios. Current systems cannot meet these requirements, as they typically utilize task-specific architecture trained on narrow data domains with limited semantic coverage. Our study addresses these limitations from two aspects: data and modeling. We first introduce an automatic data engine that enjoys significantly better scalability compared to previous human annotation or rule-based approaches. It has enabled us to create the largest dataset of its kind to date, comprising 270K image-text-mask triplets covering an unprecedented range of diverse semantic categories and attribute specifications. Based on this data foundation, we further propose a task unification paradigm that centers around referring expression segmentation. It effectively handles a wide range of vision-centric perception tasks, including classification, detection, segmentation, grounding, etc, using a single model without any task-specific heads. Combining these innovations on data and modeling, we present RemoteSAM, a foundation model that establishes new SoTA on several earth observation perception benchmarks, outperforming other foundation models such as Falcon, GeoChat, and LHRS-Bot with significantly higher efficiency.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="section compact-section" id="architecture">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 section-title">Architecture</h2>
+    <figure class="paper-figure">
+      <img src="./static/images/RemoteSAM/fig4.png"
+           alt="RemoteSAM architecture overview.">
+      <figcaption>Overview of our proposed RemoteSAM. It is a foundational model centered around a referring expression segmentation framework. This generalist vision system demonstrates multi-task visual understanding capabilities through a single unified architecture without task-specific heads.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="section compact-section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 section-title">🏆Contributions</h2>
+    <div class="content">
+      <ul class="highlight-list">
+        <li><strong>Segmentation-centered foundation model.</strong> RemoteSAM is a robust and flexible visual foundation model for Earth Observation built around a referring segmentation-based task unification paradigm.</li>
+        <li><strong>Large-scale referring dataset.</strong> RemoteSAM-270K is constructed with an automatic data curation pipeline and provides 270K image-text-mask triplets with rich semantic coverage.</li>
+        <li><strong>Hierarchical semantic vocabulary.</strong> RSVocab-1K is introduced to evaluate semantic coverage and measure dataset adaptability to real-world remote sensing applications.</li>
+        <li><strong>Holistic evaluation.</strong> RemoteSAM delivers strong performance across multiple visual-centric tasks with substantially fewer parameters.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section compact-section" id="dataset">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 section-title">Dataset</h2>
+    <div class="content">
+      <p>
+        RemoteSAM-270K is a generalized referring segmentation dataset constructed by integrating mainstream remote
+        sensing datasets and generating semantically dense referring expressions with VLMs. It includes one-to-one,
+        one-to-many, and one-to-zero samples, and uses mixed teacher models plus filtering to refine pseudo masks.
+      </p>
+    </div>
+
+    <div class="columns dataset-grid">
+      <div class="column">
+        <div class="dataset-card">
+          <h3 class="title is-5">270K Triplets</h3>
+          <p>Large-scale image-text-mask data from multi-source remote sensing datasets.</p>
+        </div>
+      </div>
+      <div class="column">
+        <div class="dataset-card">
+          <h3 class="title is-5">297 Categories</h3>
+          <p>Expanded category coverage across diverse remote sensing targets.</p>
+        </div>
+      </div>
+      <div class="column">
+        <div class="dataset-card">
+          <h3 class="title is-5">16 Attributes</h3>
+          <p>Attribute-rich expressions covering color, state, spatial relation, and fine details.</p>
+        </div>
+      </div>
+    </div>
+
+    <figure class="paper-figure">
+      <img src="./static/images/RemoteSAM/fig3.png"
+           alt="RemoteSAM-270K dataset composition.">
+      <figcaption>The composition of our proposed RemoteSAM-270K dataset. It is a generalized referring segmentation dataset, which is constructed through multi-source integration of mainstream remote sensing datasets, with semantically-dense referring expressions generated by VLMs.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="section compact-section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 section-title">Task Unification</h2>
+    <div class="content">
+      <p>
+        Compared with task-specific heads and text-based unification, RemoteSAM keeps dense pixel-level understanding
+        as the central computation and converts the segmentation output upward to higher-level tasks.
+      </p>
+    </div>
+
+    <figure class="paper-figure">
+      <img src="./static/images/RemoteSAM/fig2.png"
+           alt="Comparison of task-specific heads, text-based unification, and RemoteSAM.">
+    </figure>
+  </div>
+</section>
+
+<section class="section compact-section" id="results">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 section-title">Main Results</h2>
+    <div class="content">
+      <p>
+        RemoteSAM is evaluated across pixel-level, region-level, and image-level tasks. The results show that a
+        referring segmentation-centered model can compete with specialized models and outperform many larger
+        vision-language systems while using only 180M parameters.
+      </p>
+    </div>
+
+    <div id="main-results-carousel" class="carousel results-carousel">
+      <div class="item">
+        <div class="result-frame">
+          <img src="./static/images/RemoteSAM/fig1.png"
+               alt="Overall foundation model comparison.">
+        </div>
+        <p class="carousel-caption">Overall comparison across pixel-level, region-level, and image-level benchmarks.</p>
+      </div>
+      <div class="item">
+        <div class="result-frame">
+          <img src="./static/images/RemoteSAM/tab2.png"
+               alt="Referring expression segmentation results.">
+        </div>
+        <p class="carousel-caption">Referring expression segmentation on RRSISD and RisBench.</p>
+      </div>
+      <div class="item">
+        <div class="result-frame">
+          <img src="./static/images/RemoteSAM/tab4.png"
+               alt="Semantic segmentation results.">
+        </div>
+        <p class="carousel-caption">Semantic segmentation on iSAID and Potsdam.</p>
+      </div>
+      <div class="item">
+        <div class="result-frame">
+          <img src="./static/images/RemoteSAM/tab3.png"
+               alt="Visual grounding results.">
+        </div>
+        <p class="carousel-caption">Visual grounding on RSVG with a compact 180M-parameter model.</p>
+      </div>
+      <div class="item">
+        <div class="result-frame">
+          <img src="./static/images/RemoteSAM/tab5.png"
+               alt="Multi-label classification results.">
+        </div>
+        <p class="carousel-caption">Multi-label classification on DIOR and DOTAv2.</p>
+      </div>
+      <div class="item">
+        <div class="result-frame">
+          <img src="./static/images/RemoteSAM/tab6.png"
+               alt="Object counting results.">
+        </div>
+        <p class="carousel-caption">Object counting on DIOR and DOTAv2.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section compact-section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 section-title">Qualitative Analysis</h2>
+    <div class="content">
+      <p>
+        RemoteSAM translates referring segmentation into outputs for eight visual-centric tasks, including segmentation,
+        grounding, detection, counting, classification, and captioning.
+      </p>
+    </div>
+
+    <figure class="paper-figure">
+      <img src="./static/images/RemoteSAM/fig6.png"
+           alt="RemoteSAM inference examples across eight visual tasks.">
+      <figcaption>Inference examples of RemoteSAM on 8 visual-centric tasks.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="section compact-section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title is-3 section-title">BibTeX</h2>
+    <pre><code>@misc{yao2025RemoteSAM,
+      title={RemoteSAM: Towards Segment Anything for Earth Observation}, 
+      author={Liang Yao and Fan Liu and Delong Chen and Chuanyi Zhang and Yijun Wang and Ziyun Chen and Wei Xu and Shimin Di and Yuhui Zheng},
+      year={2025},
+      eprint={2505.18022},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2505.18022}, 
+}</code></pre>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <p>
+        This website is adapted from <a href="https://nerfies.github.io">Nerfies</a>,
+        licensed under a <a href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+      </p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

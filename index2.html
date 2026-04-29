@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="RemoteShield is a robust remote sensing multimodal large language model for Earth Observation under realistic image and text perturbations.">
+  <meta name="keywords" content="RemoteShield, remote sensing, Earth Observation, MLLM, robustness, preference learning">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RemoteShield</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/logo.jpg">
+
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar is-white" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="#top">RemoteShield</a>
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-end">
+      <a class="navbar-item" href="#abstract">Abstract</a>
+      <a class="navbar-item" href="#architecture">Architecture</a>
+      <a class="navbar-item" href="#dataset">Dataset</a>
+      <a class="navbar-item" href="#results">Results</a>
+      <a class="navbar-item" href="#BibTeX">BibTeX</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero" id="top">
+  <div class="hero-body">
+    <div class="container is-max-desktop has-text-centered">
+      <h1 class="title is-1 publication-title">RemoteShield: Enable Robust Multimodal Large Language Models for Earth Observation</h1>
+      <p class="subtitle is-4 venue">arXiv 2026</p>
+
+      <div class="is-size-5 publication-authors">
+        <span class="author-block">Rui Min<sup>1,*</sup>,</span>
+        <span class="author-block">Liang Yao<sup>1,*</sup>,</span>
+        <span class="author-block">Shiyu Miao<sup>2,*</sup>,</span>
+        <span class="author-block">Shengxiang Xu<sup>3</sup>,</span>
+        <span class="author-block">Yuxuan Liu<sup>1</sup>,</span>
+        <span class="author-block">Chuanyi Zhang<sup>1</sup>,</span>
+        <span class="author-block">Shimin Di<sup>3</sup>,</span>
+        <span class="author-block">Fan Liu<sup>1,&dagger;</sup></span>
+      </div>
+
+      <div class="is-size-5 publication-authors affiliations">
+        <span class="author-block"><sup>1</sup>Hohai University</span>
+        <span class="author-block"><sup>2</sup>Nanjing University</span>
+        <span class="author-block"><sup>3</sup>Southeast University</span>
+      </div>
+
+      <p class="publication-note">* Equal contribution. &dagger; Corresponding author.</p>
+
+      <div class="publication-links">
+        <span class="link-block">
+          <a href="./static/remoteshield_paper.pdf"
+             class="external-link button is-normal is-rounded is-dark">
+            <span class="icon">
+              <i class="fas fa-file-pdf"></i>
+            </span>
+            <span>Paper</span>
+          </a>
+        </span>
+        <span class="link-block">
+          <a href="https://github.com/SteveJoker404/RemoteShield"
+             class="external-link button is-normal is-rounded is-dark">
+            <span class="icon">
+              <i class="fab fa-github"></i>
+            </span>
+            <span>Code</span>
+          </a>
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section compact-section" id="abstract">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 section-title">Abstract</h2>
+    <div class="content abstract-text">
+      <p>
+        A robust Multimodal Large Language Model (MLLM) for Earth Observation should maintain consistent interpretation  and reasoning under realistic input variations. However,  current Remote Sensing MLLMs fail to meet this requirement.  Trained on carefully curated clean datasets, they  learn brittle mappings that do not generalize to noisy conditions  in operational Earth Observation. Consequently,  their performance degrades when confronted with imperfect  inputs in deployment. To quantify this vulnerability,  we construct a realistic set of multimodal perturbations, including  visual degradations such as cloud and fog cover, together  with diverse human-centric textual variations ranging  from colloquialisms to vague or omitted instructions. Empirical evaluations show that these perturbations signiffcantly  impair the visual-semantic reasoning capabilities  of leading RS foundation models. To address this limitation,  we introduce RemoteShield, a robust Remote Sensing MLLM trained to maintain consistent outputs across realistic  input variations. During training, each clean sample  is paired with its image-text perturbed variants to form a  semantic equivalence cluster. Rather than directly fftting  noisy samples, RemoteShield is optimized through preference  learning over clean and perturbed conditions within  the same cluster. By comparing model responses to clean  and corrupted inputs, the model is encouraged to favor  stable responses over perturbation-induced failures. This  cross-condition alignment helps the model focus on underlying  task semantics despite visual degradations and textual  noise. Experiments on three Earth Observation tasks show  that RemoteShield consistently delivers stronger robustness  and cross-condition consistency than representative baselines  under realistic multimodal perturbations.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="section compact-section" id="architecture">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 section-title">Architecture</h2>
+    <div class="content overview-text">
+    </div>
+
+    <figure class="paper-figure">
+      <img src="./static/images/RemoteShield/overview.png"
+           alt="RemoteShield training framework overview.">
+      <figcaption>Overview of the RemoteShield training framework. Stage 1 constructs the DPO training triplets through multi-condition response inference, uniffed quality scoring, and preference pair selection over semantically equivalent multimodal inputs. Stage 2 performs robust alignment via Direct Preference Optimization (DPO) using the resulting preference triplets.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="section compact-section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 section-title">🏆Contributions</h2>
+    <div class="content">
+      <ul class="highlight-list">
+        <li><strong>Multimodal perturbation dataset.</strong> The paper constructs a comprehensive dataset that simulates environmental visual degradations and human-centric textual noise in real Earth Observation scenarios.</li>
+        <li><strong>Robustness diagnosis.</strong> It evaluates representative remote sensing MLLMs and quantitatively reveals significant degradation under unconstrained noisy inputs.</li>
+        <li><strong>Cross-condition alignment.</strong> RemoteShield shifts robustness learning from passive noise fitting to active preference-based alignment across clean and perturbed conditions.</li>
+        <li><strong>Robust EO performance.</strong> Extensive experiments show improved accuracy and reasoning consistency under coupled multimodal perturbations.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section compact-section" id="results">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 section-title">Main Results</h2>
+    <div class="content">
+      <p>
+        RemoteShield is evaluated on scene classification, visual question answering, and visual grounding. Across all
+        three tasks, it achieves lower Relative Performance Drop and higher Cross-Condition Agreement, indicating
+        stronger robustness and behavioral stability under matched clean and perturbed inputs.
+      </p>
+    </div>
+
+    <div id="main-results-carousel" class="carousel results-carousel">
+      <div class="item">
+        <div class="result-frame">
+          <img src="./static/images/RemoteShield/tab1.png"
+               alt="Main results on scene classification.">
+        </div>
+        <p class="carousel-caption">Scene classification: RemoteShield improves perturbed accuracy, RPD, and CCA.</p>
+      </div>
+      <div class="item">
+        <div class="result-frame">
+          <img src="./static/images/RemoteShield/tab2.png"
+               alt="Main results on visual question answering.">
+        </div>
+        <p class="carousel-caption">Visual question answering: RemoteShield maintains answer correctness and cross-condition consistency.</p>
+      </div>
+      <div class="item">
+        <div class="result-frame">
+          <img src="./static/images/RemoteShield/tab3.png"
+               alt="Main results on visual grounding.">
+        </div>
+        <p class="carousel-caption">Visual grounding: RemoteShield resists localization drift under multimodal perturbation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section compact-section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 section-title">Robustness Analysis</h2>
+    <div class="content">
+      <p>
+        Further analysis shows that the robustness gain persists under stronger image perturbations and transfers to
+        unseen text perturbations such as homoglyph substitutions.
+      </p>
+    </div>
+
+    <div id="robustness-carousel" class="carousel results-carousel">
+      <div class="item">
+        <div class="result-frame">
+          <img src="./static/images/RemoteShield/fig1.png"
+               alt="Performance under increasing image perturbation strength.">
+        </div>
+        <p class="carousel-caption">Performance under increasing image perturbation strength.</p>
+      </div>
+      <div class="item">
+        <div class="result-frame">
+          <img src="./static/images/RemoteShield/fig2.png"
+               alt="Performance under various text perturbations.">
+        </div>
+        <p class="carousel-caption">RemoteShield outperforms baselines under four seen text perturbations and an unseen homoglyph perturbation, showing robustness beyond training perturbations.</p>
+      </div>
+      <div class="item">
+        <div class="result-frame">
+          <img src="./static/images/RemoteShield/fig3.png"
+               alt="Qualitative robustness examples.">
+        </div>
+        <p class="carousel-caption">Qualitative case studies under perturbation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section compact-section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title is-3 section-title">BibTeX</h2>
+    <pre><code>@misc{min2026remoteshieldenablerobustmultimodal,
+      title={RemoteShield: Enable Robust Multimodal Large Language Models for Earth Observation}, 
+      author={Rui Min and Liang Yao and Shiyu Miao and Shengxiang Xu and Yuxuan Liu and Chuanyi Zhang and Shimin Di and Fan Liu},
+      year={2026},
+      eprint={2604.17243},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2604.17243}, 
+}</code></pre>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <p>
+        This website is adapted from <a href="https://nerfies.github.io">Nerfies</a>,
+        licensed under a <a href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+      </p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

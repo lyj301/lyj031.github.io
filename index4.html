@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="RemoteAgent is an RL-aligned agentic MLLM framework that bridges vague human intents and Earth Observation tasks.">
+  <meta name="keywords" content="RemoteAgent, VagueEO, Earth Observation, remote sensing, agentic MLLM, reinforcement learning">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RemoteAgent</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/logo.jpg">
+
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar is-white" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="#top">RemoteAgent</a>
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-end">
+      <a class="navbar-item" href="#abstract">Abstract</a>
+      <a class="navbar-item" href="#architecture">Architecture</a>
+      <a class="navbar-item" href="#dataset">Dataset</a>
+      <a class="navbar-item" href="#results">Results</a>
+      <a class="navbar-item" href="#BibTeX">BibTeX</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero" id="top">
+  <div class="hero-body">
+    <div class="container is-max-desktop has-text-centered">
+      <h1 class="title is-1 publication-title">RemoteAgent: Bridging Vague Human Intents and Earth Observation with RL-based Agentic MLLMs</h1>
+      <p class="subtitle is-4 venue">arXiv 2026</p>
+
+      <div class="is-size-5 publication-authors">
+        <span class="author-block">Liang Yao<sup>1,*</sup>,</span>
+        <span class="author-block">Shengxiang Xu<sup>2,*</sup>,</span>
+        <span class="author-block">Fan Liu<sup>1,&dagger;</sup>,</span>
+        <span class="author-block">Chuanyi Zhang<sup>1</sup>,</span>
+        <span class="author-block">Bishun Yao<sup>1</sup>,</span>
+        <span class="author-block">Rui Min<sup>1</sup>,</span>
+        <span class="author-block">Yongjun Li<sup>1</sup>,</span>
+        <span class="author-block">Chaoqian Ouyang<sup>3</sup>,</span>
+        <span class="author-block">Shimin Di<sup>2</sup>,</span>
+        <span class="author-block">Min-Ling Zhang<sup>2</sup></span>
+      </div>
+
+      <div class="is-size-5 publication-authors affiliations">
+        <span class="author-block"><sup>1</sup>Hohai University</span>
+        <span class="author-block"><sup>2</sup>Southeast University</span>
+        <span class="author-block"><sup>3</sup>Sun Yat-sen University</span>
+      </div>
+
+      <p class="publication-note">* Equal contribution. &dagger; Corresponding author.</p>
+
+      <div class="publication-links">
+        <span class="link-block">
+          <a href="./static/remoteagent_paper.pdf"
+             class="external-link button is-normal is-rounded is-dark">
+            <span class="icon">
+              <i class="fas fa-file-pdf"></i>
+            </span>
+            <span>Paper</span>
+          </a>
+        </span>
+        <span class="link-block">
+          <a href="https://github.com/1e12Leon/RemoteAgent"
+             class="external-link button is-normal is-rounded is-dark">
+            <span class="icon">
+              <i class="fab fa-github"></i>
+            </span>
+            <span>Code</span>
+          </a>
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section compact-section" id="abstract">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 section-title">Abstract</h2>
+    <div class="content abstract-text">
+      <p>
+        Earth Observation (EO) systems are essentially designed  to support domain experts who often express their requirements  through vague natural language rather than precise,  machine-friendly instructions. Depending on the speciffc  application scenario, these vague queries can demand  vastly different levels of visual precision. Consequently,  a practical EO AI system must bridge the gap  between ambiguous human queries and the appropriate  multi-granularity visual analysis tasks, ranging from holistic  image interpretation to ffne-grained pixel-wise predictions. While Multi-modal Large Language Models (MLLMs) demonstrate strong semantic understanding, their  text-based output format is inherently ill-suited for dense,  precision-critical spatial predictions. Existing agentic  frameworks address this limitation by delegating tasks to  external tools, but indiscriminate tool invocation is computationally  inefffcient and underutilizes the MLLM’s native  capabilities. To this end, we propose RemoteAgent,  an agentic framework that strategically respects the intrinsic  capability boundaries of MLLMs. To empower this  framework to understand real user intents, we construct VagueEO, a human-centric instruction dataset pairing EO  tasks with simulated vague natural-language queries. By  leveraging VagueEO for reinforcement ffne-tuning, we align  an MLLM into a robust cognitive core that directly resolves  image- and sparse region-level tasks. Consequently, RemoteAgent  processes suitable tasks internally while intelligently  orchestrating specialized tools via the Model Context  Protocol exclusively for dense predictions. Extensive  experiments demonstrate that RemoteAgent achieves robust  intent recognition capabilities while delivering highly competitive  performance across diverse EO tasks.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="section compact-section" id="architecture">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 section-title">Architecture</h2>
+    <figure class="paper-figure">
+      <img src="./static/images/RemoteAgent/fig2.png"
+           alt="RemoteAgent training and inference framework.">
+      <figcaption>Overview of RemoteAgent. During training, the model is aligned via GRPO, guided by a uniffed multi-task reward that evaluates
+coordinate, numerical, and textual outputs. During inference, the agent dynamically plans and routes queries, directly resolving macroscopic
+ tasks internally while delegating dense predictions to a specialized external toolkit. Task abbreviations: Visual Question Answering
+(VQA), Visual Grounding (VG), Classiffcation (CLS), Detection (DET), Segmentation (SEG), Referring Expression Segmentation (RES),
+Change Detection (CD), and Contour Extraction (CE).</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="section compact-section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 section-title">🏆Contributions</h2>
+    <div class="content">
+      <ul class="highlight-list">
+        <li><strong>Human-centric EO benchmark.</strong> VagueEO connects free-form user intents with standardized Earth Observation task annotations.</li>
+        <li><strong>Capability-aware agent.</strong> RemoteAgent uses RL alignment to resolve intrinsic tasks internally while routing dense predictions to specialized tools.</li>
+        <li><strong>Unified rewards.</strong> Coordinate, numerical, and textual outputs are supervised through a single GRPO-compatible reward interface.</li>
+        <li><strong>Holistic evaluation.</strong> Experiments show strong intent recognition, data efficiency on intrinsic tasks, and expert-level precision on extrinsic tool calls.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section compact-section" id="dataset">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 section-title">Dataset</h2>
+    <div class="content">
+      <p>
+        The paper constructs VagueEO, a benchmark that pairs vague, human-centric queries with standard structural
+        annotations. Its training split covers intrinsic tasks used for RL fine-tuning, while its test split evaluates
+        both intrinsic tasks and unseen dense spatial tasks.
+      </p>
+    </div>
+
+    <div class="columns dataset-grid">
+      <div class="column">
+        <div class="dataset-card">
+          <h3 class="title is-5">10 EO Tasks</h3>
+          <p>Scene classification, multi-label classification, grounding, counting, reasoning, detection, segmentation, referring segmentation, and change detection.</p>
+        </div>
+      </div>
+      <div class="column">
+        <div class="dataset-card">
+          <h3 class="title is-5">Vague Queries</h3>
+          <p>LLM-generated free-form instructions simulate how non-expert users describe real analytical needs.</p>
+        </div>
+      </div>
+      <div class="column">
+        <div class="dataset-card">
+          <h3 class="title is-5">Structured Labels</h3>
+          <p>Each query is paired with deterministic annotations across image-level labels, boxes, and masks.</p>
+        </div>
+      </div>
+    </div>
+
+    <figure class="paper-figure">
+      <img src="./static/images/RemoteAgent/fig1.png"
+           alt="VagueEO benchmark overview.">
+      <figcaption>VagueEO Benchmark Overview. We construct ten diverse Earth Observation tasks that pair vague, human-centric queries with
+standardized structural annotations.
+</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="section compact-section" id="results">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 section-title">Main Results</h2>
+    <div class="content">
+      <p>
+        RemoteAgent is evaluated along three axes: intent recognition, intrinsic MLLM capability, and extrinsic tool
+        execution. It achieves strong sparse reasoning performance and routes dense tasks to tools with competitive
+        precision.
+      </p>
+    </div>
+
+    <div id="main-results-carousel" class="carousel results-carousel">
+      <div class="item">
+        <div class="result-frame">
+          <img src="./static/images/RemoteAgent/tab1.png"
+               alt="Scene classification results.">
+        </div>
+        <p class="carousel-caption">Intrinsic task: scene classification on AID and WHU-RS19.</p>
+      </div>
+      <div class="item">
+        <div class="result-frame">
+          <img src="./static/images/RemoteAgent/tab2.png"
+               alt="Visual grounding results.">
+        </div>
+        <p class="carousel-caption">Intrinsic sparse localization: visual grounding on DIOR-RSVG.</p>
+      </div>
+      <div class="item">
+        <div class="result-frame">
+          <img src="./static/images/RemoteAgent/tab3.png"
+               alt="Geospatial region reasoning results.">
+        </div>
+        <p class="carousel-caption">Intrinsic reasoning: geospatial region reasoning on EarthReason.</p>
+      </div>
+      <div class="item">
+        <div class="result-frame">
+          <img src="./static/images/RemoteAgent/tab4.png"
+               alt="Object counting results.">
+        </div>
+        <p class="carousel-caption">Intrinsic numerical reasoning: object counting on HRRSD and DOTAv2.</p>
+      </div>
+      <div class="item">
+        <div class="result-frame">
+          <img src="./static/images/RemoteAgent/tab5.png"
+               alt="Object detection results.">
+        </div>
+        <p class="carousel-caption">Extrinsic execution: object detection via specialized tools.</p>
+      </div>
+      <div class="item">
+        <div class="result-frame">
+          <img src="./static/images/RemoteAgent/tab6.png"
+               alt="Semantic segmentation results.">
+        </div>
+        <p class="carousel-caption">Extrinsic execution: semantic segmentation on iSAID and Potsdam.</p>
+      </div>
+      <div class="item">
+        <div class="result-frame">
+          <img src="./static/images/RemoteAgent/tab7.png"
+               alt="Referring expression segmentation results.">
+        </div>
+        <p class="carousel-caption">Extrinsic execution: referring expression segmentation on RRSIS-D.</p>
+      </div>
+      <div class="item">
+        <div class="result-frame">
+          <img src="./static/images/RemoteAgent/tab8.png"
+               alt="Building damage assessment results.">
+        </div>
+        <p class="carousel-caption">Extrinsic execution: building damage assessment on xBD.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section compact-section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 section-title">Qualitative Analysis</h2>
+    <div class="content">
+      <p>
+        RemoteAgent interprets free-form queries, identifies whether they require dense outputs, and invokes the
+        relevant expert tool without manual intervention.
+      </p>
+    </div>
+
+    <figure class="paper-figure">
+      <img src="./static/images/RemoteAgent/fig3.png"
+           alt="RemoteAgent qualitative routing examples.">
+      <figcaption>Qualitative results of RemoteAgent. The agent accurately interprets free-form queries and dynamically routes them to specialized
+tools, seamlessly bridging vague intents with precision-critical execution.
+</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="section compact-section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title is-3 section-title">BibTeX</h2>
+    <pre><code>@misc{yao2026RemoteAgent,
+      title={RemoteAgent: Bridging Vague Human Intents and Earth Observation with RL-based Agentic MLLMs}, 
+      author={Liang Yao and Shengxiang Xu and Fan Liu and Chuanyi Zhang and Bishun Yao and Rui Min and Yongjun Li and Chaoqian Ouyang and Shimin Di and Min-Ling Zhang},
+      year={2026},
+      eprint={2604.07765},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2604.07765}, 
+}</code></pre>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <p>
+        This website is adapted from <a href="https://nerfies.github.io">Nerfies</a>,
+        licensed under a <a href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+      </p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
